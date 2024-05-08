@@ -5,7 +5,7 @@
 [![Crate](https://img.shields.io/crates/v/bevy_tweening.svg)](https://crates.io/crates/bevy_tweening)
 [![Build Status](https://github.com/djeedai/bevy_tweening/actions/workflows/ci.yaml/badge.svg)](https://github.com/djeedai/bevy_tweening/actions/workflows/ci.yaml)
 [![Coverage Status](https://coveralls.io/repos/github/djeedai/bevy_tweening/badge.svg?branch=main&kill_cache=1)](https://coveralls.io/github/djeedai/bevy_tweening?branch=main)
-[![Bevy tracking](https://img.shields.io/badge/Bevy%20tracking-v0.12-lightblue)](https://github.com/bevyengine/bevy/blob/main/docs/plugins_guidelines.md#main-branch-tracking)
+[![Bevy tracking](https://img.shields.io/badge/Bevy%20tracking-v0.13-lightblue)](https://github.com/bevyengine/bevy/blob/main/docs/plugins_guidelines.md#main-branch-tracking)
 
 Tweening animation plugin for the Bevy game engine.
 
@@ -24,7 +24,7 @@ Add to `Cargo.toml`:
 
 ```toml
 [dependencies]
-bevy_tweening = "0.9"
+bevy_tweening = "0.10"
 ```
 
 This crate supports the following features:
@@ -180,8 +180,8 @@ struct MyXAxisLens {
     end: f32,
 }
 
-impl Lens<Tranform> for MyXAxisLens {
-    fn lerp(&self, target: &mut Tranform, ratio: f32) -> f32 {
+impl Lens<Transform> for MyXAxisLens {
+    fn lerp(&mut self, target: &mut Transform, ratio: f32) {
         let start = Vec3::new(self.start, 0., 0.);
         let end = Vec3::new(self.end, 0., 0.);
         target.translation = start + (end - start) * ratio;
@@ -212,7 +212,7 @@ struct MyCustomLens {
 }
 
 impl Lens<MyCustomComponent> for MyCustomLens {
-    fn lerp(&self, target: &mut MyCustomComponent, ratio: f32) -> f32 {
+    fn lerp(&mut self, target: &mut MyCustomComponent, ratio: f32) {
         target.0 = self.start + (self.end - self.start) * ratio;
     }
 }
@@ -327,6 +327,7 @@ Compatibility of `bevy_tweening` versions:
 
 | `bevy_tweening` | `bevy` |
 | :--             | :--    |
+| `0.10`          | `0.13` |
 | `0.9`           | `0.12` |
 | `0.8`           | `0.11` |
 | `0.7`           | `0.10` |
